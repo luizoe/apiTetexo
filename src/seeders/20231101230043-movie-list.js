@@ -22,7 +22,9 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     let MovieList = [];
     return new Promise((resolve, reject) => {
-      fs.createReadStream(path.join(__dirname, '../../data', 'movielist.csv'))
+      const movieFile = path.join(__dirname, '../../data', 'movielist.csv');
+      if(fs.existsSync(movieFile)) {
+        fs.createReadStream(movieFile)
         .pipe(parse({ delimiter: ";", from_line: 2 }))
         .on("data", (rowData) => {          
           MovieList.push({
@@ -42,6 +44,10 @@ module.exports = {
             reject(error);
           });
         });
+      } else {
+        reject("NO FILE FOUND");
+      }
+      
     });
   },
 
