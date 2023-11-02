@@ -23,14 +23,18 @@ describe("get /awards/winners", () => {
             }
         ]
     };
+    const totalRequestSuccess = 12;
+    let requestsDone = 0;
     it("return status 200", (done) => {
         request(url+"/awards/winners", (err, resp, body) => {
-            expect(resp.statusCode).to.equal(200);
+            requestsDone++;
+            expect(resp.statusCode).to.equal(200);            
             done();
         });
     });
     it("check 'responseData.min' is an array", (done) => {
         request(url+"/awards/winners", (err, resp, body) => {
+            requestsDone++;
             const responseData = JSON.parse(body);
             expect(responseData.min).to.instanceOf(Array);
             done();
@@ -38,6 +42,7 @@ describe("get /awards/winners", () => {
     });
     it("check 'responseData.max' is an array", (done) => {
         request(url+"/awards/winners", (err, resp, body) => {
+            requestsDone++;
             const responseData = JSON.parse(body);
             expect(responseData.max).to.instanceOf(Array);
             done();
@@ -45,6 +50,7 @@ describe("get /awards/winners", () => {
     });
     it("check 'responseData.min[0].interval' is the small or equals to 'responseData.max[0].interval'", (done) => {
         request(url+"/awards/winners", (err, resp, body) => {
+            requestsDone++;
             const responseData = JSON.parse(body);
             expect(responseData.min[0].interval).to.lessThanOrEqual(successData.max[0].interval);
             done();
@@ -53,6 +59,7 @@ describe("get /awards/winners", () => {
     // MIN index, test
     it("check 'responseData.min[0].producer' is the same as our sample", (done) => {
         request(url+"/awards/winners", (err, resp, body) => {
+            requestsDone++;
             const responseData = JSON.parse(body);
             expect(responseData.min[0].producer).to.equal(successData.min[0].producer);
             done();
@@ -60,6 +67,7 @@ describe("get /awards/winners", () => {
     });
     it("check 'responseData.min[0].interval' is the same as our sample", (done) => {
         request(url+"/awards/winners", (err, resp, body) => {
+            requestsDone++;
             const responseData = JSON.parse(body);
             expect(responseData.min[0].interval).to.equal(successData.min[0].interval);
             done();
@@ -67,6 +75,7 @@ describe("get /awards/winners", () => {
     });
     it("check 'responseData.min[0].previousWin' is the same as our sample", (done) => {
         request(url+"/awards/winners", (err, resp, body) => {
+            requestsDone++;
             const responseData = JSON.parse(body);
             expect(responseData.min[0].previousWin).to.equal(successData.min[0].previousWin);
             done();
@@ -74,6 +83,7 @@ describe("get /awards/winners", () => {
     });
     it("check 'responseData.min[0].followingWin' is the same as our sample", (done) => {
         request(url+"/awards/winners", (err, resp, body) => {
+            requestsDone++;
             const responseData = JSON.parse(body);
             expect(responseData.min[0].followingWin).to.equal(successData.min[0].followingWin);
             done();
@@ -82,6 +92,7 @@ describe("get /awards/winners", () => {
     // MAX index, test
     it("check 'responseData.max[0].producer' is the same as our sample", (done) => {
         request(url+"/awards/winners", (err, resp, body) => {
+            requestsDone++;
             const responseData = JSON.parse(body);
             expect(responseData.max[0].producer).to.equal(successData.max[0].producer);
             done();
@@ -89,6 +100,7 @@ describe("get /awards/winners", () => {
     });
     it("check 'responseData.max[0].interval' is the same as our sample", (done) => {
         request(url+"/awards/winners", (err, resp, body) => {
+            requestsDone++;
             const responseData = JSON.parse(body);
             expect(responseData.max[0].interval).to.equal(successData.max[0].interval);
             done();
@@ -96,6 +108,7 @@ describe("get /awards/winners", () => {
     });
     it("check 'responseData.max[0].previousWin' is the same as our sample", (done) => {
         request(url+"/awards/winners", (err, resp, body) => {
+            requestsDone++;
             const responseData = JSON.parse(body);
             expect(responseData.max[0].previousWin).to.equal(successData.max[0].previousWin);
             done();
@@ -103,9 +116,14 @@ describe("get /awards/winners", () => {
     });
     it("check 'responseData.max[0].followingWin' is the same as our sample", (done) => {
         request(url+"/awards/winners", (err, resp, body) => {
+            requestsDone++;
             const responseData = JSON.parse(body);
             expect(responseData.max[0].followingWin).to.equal(successData.max[0].followingWin);
             done();
         });
+    });
+    it(`check max requests done, MAX: ${totalRequestSuccess}`, (done) => {
+        expect(totalRequestSuccess).to.equal(requestsDone);
+        done();
     });
 });

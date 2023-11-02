@@ -65,7 +65,6 @@ class GRAwardsService
     findAllWinners()
     {
         return new Promise(async (resolve, reject) => {
-            let producers = [];
             try {
                 const movieList = await MovieORM.findAll({
                     where: {
