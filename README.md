@@ -1,10 +1,12 @@
 # API Taxo
 
-1 º - Primeiro passo tenha os requisitos abaixo:
-
+Este projeto foi desenvolvido com a seguinte versão do node:
 - Node v20.9.0
 - NPM 10.2.2
 - NPX 10.2.2
+
+
+1 º - Primeiro passao, clone ou baixe este repositório
  
 2 º - Segundo passo, renomeie o arquivo "sample_db.sqlite" que está dentro do diretório "database", para "database.sqlite"
 
@@ -23,6 +25,8 @@
 API:
 http://localhost:7548/awards/winners
 
+LEMBRANDO QUE: a porta padrão deste projeto é "7548", caso tenha alterado a porta, tera que alterar de "http://localhost:7548/awards/winners" para "http://localhost:{PORTA}/awards/winners"
+
 # Testes
 
-Para executar os testes, execute o comando "npm run test" os testes implementados foram feitos utilizando o "Mocha" e o "Chai"
+Para executar os testes, primeiro inicie o servidor "npm start" e depois execute o comando "npm run test"
